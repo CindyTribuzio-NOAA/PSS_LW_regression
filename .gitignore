@@ -1,0 +1,22 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+data/
+
+# confidential fishery dependent data
+*confidential*
+
+# Don't track data
+*.xlsx
+*.xlsm
+*.Rdata
+
+# ignore shape files
+shapefiles
+
+# ignore zip files
+*.zip
+
+# Windows thumbnail cache files
+Thumbs.db
