@@ -2,14 +2,14 @@
 
 Data are from the Alaska Fisheries Science Center bottom trawl surveys, fishery at-sea observations and directed surveys.
 
-Parameters were estimated using the formula: weight ~ a * length ^ b, and parameter results, with confidence intervals can be found in: 
-PSS_LW_regression_params.csv
+Parameters were estimated using the formula: weight ~ a * length ^ b, and parameter results, with confidence intervals. Resultant parameters can be found in: 
+[PSS_LW_regression_params.csv](https://github.com/CindyTribuzio-NOAA/PSS_LW_regression/blob/main/results/PSS_LW_regression_params.csv)
 
 Results will be updated as data are added.
 
 
 # Notes
-Data are restricted to animals that can be measured, therefore, data are limited as length increases. There are no length and weight data for animals greater than 344 cm TL at this time. The maximum unverified length is about 700 cm TL and the maximum verified length is 465 cm TL (Matta et al. 2024)
+Data are restricted to animals that can be measured, therefore, data are limited as length increases. There are no length and weight data for animals greater than 344 cm TL at this time. The maximum unverified length is about 700 cm TL and the maximum verified length is 465 cm TL ([Matta et al. 2024](https://link.springer.com/article/10.1007/s00300-024-03247-8))
 
 <img src="https://raw.githubusercontent.com/CindyTribuzio-NOAA/PSS_LW_regression/main/results/PSS_LW_regression.png"
      alt="Pacific sleeper shark weight-at-length regression">

@@ -40,9 +40,9 @@ matrix_coef <- summary(LW_fit)$coefficients %>%
   rownames_to_column() %>% 
   rename(parameter = rowname)
 write_csv(matrix_coef, paste0(getwd(),"/results/PSS_LW_regression_params.csv"))
-lw_mod <- function(x){(matrix_coef[1,1]) * (x^matrix_coef[2,1])}
-lw_ll <- function(x){(matrix_coef[1,2]) * (x^matrix_coef[2,2])}
-lw_ul <- function(x){(matrix_coef[1,3]) * (x^matrix_coef[2,3])}
+lw_mod <- function(x){(matrix_coef[1,2]) * (x^matrix_coef[2,2])}
+lw_ll <- function(x){(matrix_coef[1,3]) * (x^matrix_coef[2,3])}
+lw_ul <- function(x){(matrix_coef[1,4]) * (x^matrix_coef[2,4])}
 
 lw_plot <- ggplot(lw_dat, aes(x = length, y = weight))+
   geom_point(alpha=0.3, size=2)+
@@ -54,14 +54,11 @@ lw_plot <- ggplot(lw_dat, aes(x = length, y = weight))+
   #stat_function(fun=PSS_Yano, linetype="longdash", color="#c42f52", size=1) +
   labs(x="Total length (cm)", y= "Weight (kg)") +
   coord_cartesian(ylim=c(0,1000)) +
-  annotate("text", x=20, y=1000, parse= TRUE, 
-           label= as.character(expression(paste("W = ", matrix_coef[1,1] ,e^"-06 ", TL ^ "3.25", "   This paper"))), 
+  annotate("text", x=20, y=1000, 
+           label= bquote("W = "~ .(round(matrix_coef[1,2]*10^6, 2))~e^-06~ " * " ~ TL^.(round(matrix_coef[2,2], 2))), 
            hjust=0, size=3)+
   theme_pubr(legend="none", base_size = 11) +
   theme(plot.margin=grid::unit(c(0,0,0,0), "mm"))
 
-ggsave(lw_plot, paste0(getwd(), "/results/PSS_LW_regression.png"))
-
 ggsave(path = paste0(getwd(), "/results/"),
        "PSS_LW_regression.png", plot= lw_plot, dpi=600, width = 4, height = 4)
-
