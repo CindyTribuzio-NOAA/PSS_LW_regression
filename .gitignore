@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 data/
+database.csv
 
 # confidential fishery dependent data
 *confidential*
