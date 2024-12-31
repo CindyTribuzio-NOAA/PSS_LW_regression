@@ -31,7 +31,8 @@ ggplot(lw_dat, aes(log(length), log(weight), color=factor(sex))) +
 # LL regression with combined sexes, which includes unknowns----
 start_values <- c(a = 0.000007, b = 3)
 LW_fit <- lw_dat %>% nls(weight ~ a * length ^ b, start = start_values, data = .)
-CI_fit <- as.data.frame(confint(LW_fit, level = 0.75))
+alevel <- 0.75
+CI_fit <- as.data.frame(confint(LW_fit, level = alevel))
 names(CI_fit) <- c("ll", "ul")
 matrix_coef <- summary(LW_fit)$coefficients %>% 
   bind_cols(CI_fit) %>% 
@@ -55,10 +56,12 @@ lw_plot <- ggplot(lw_dat, aes(x = length, y = weight))+
   labs(x="Total length (cm)", y= "Weight (kg)") +
   coord_cartesian(ylim=c(0,1000)) +
   annotate("text", x=20, y=1000, 
-           label= bquote("W = "~ .(round(matrix_coef[1,2]*10^6, 2))~e^-06~ " * " ~ TL^.(round(matrix_coef[2,2], 2))), 
+           label= bquote("W = "~ .(round(matrix_coef[1,2]*10^6, 2))~e^-06~ " * " ~ 
+                           TL^.(round(matrix_coef[2,2], 2))~ "alpha = " ~.(alevel)), 
            hjust=0, size=3)+
   theme_pubr(legend="none", base_size = 11) +
   theme(plot.margin=grid::unit(c(0,0,0,0), "mm"))
 
 ggsave(path = paste0(getwd(), "/results/"),
        "PSS_LW_regression.png", plot= lw_plot, dpi=600, width = 4, height = 4)
+
