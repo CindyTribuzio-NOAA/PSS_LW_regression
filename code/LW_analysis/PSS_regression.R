@@ -31,7 +31,7 @@ ggplot(lw_dat, aes(log(length), log(weight), color=factor(sex))) +
 # TL LW regression with combined sexes, which includes unknowns----
 start_values <- c(a = 0.000007, b = 3)
 TLLW_fit <- lw_dat %>% nls(weight ~ a * length ^ b, start = start_values, data = .)
-alevel <- 0.75
+alevel <- 0.50
 TLCI_fit <- as.data.frame(confint(TLLW_fit, level = alevel))
 names(TLCI_fit) <- c("ll", "ul")
 TLmatrix_coef <- summary(TLLW_fit)$coefficients %>% 
@@ -111,7 +111,7 @@ pclw_dat <- lw_dat %>%
 # PCL to weight regression----
 start_values <- c(a = 0.000007, b = 3)
 PCLLW_fit <- pclw_dat %>% nls(weight ~ a * pcl ^ b, start = start_values, data = .)
-alevel <- 0.75
+alevel <- 0.5
 PCLCI_fit <- as.data.frame(confint(PCLLW_fit, level = alevel))
 names(PCLCI_fit) <- c("ll", "ul")
 PCLmatrix_coef <- summary(PCLLW_fit)$coefficients %>% 
